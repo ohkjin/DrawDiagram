@@ -1,0 +1,31 @@
+section, article {
+    padding: 50px;
+    margin: 30px;
+}
+section>p{
+    margin-top: 20px;
+}
+
+article {
+    background-color: rgb(246, 248, 243);
+}
+
+article > div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divImg {
+    width: 30%;
+    text-align: center;
+}
+
+article img {
+    border-radius: 50%;
+}
+
+article p {
+    width: 70%;
+    
+}

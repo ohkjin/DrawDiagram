@@ -1,0 +1,91 @@
+* {
+    margin: 0px; /* 바깥쪽 여백 */
+    padding: 0px; /* 안쪽 여백 */
+}
+main {
+    background-color: rgb(231, 236, 232);
+    width : 60%;
+    margin-left :20%;
+}
+header {
+    padding: 50px;
+    margin-top: 30px;
+    background-color: cadetblue;
+}
+header > h1{
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+
+ul{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 80px;
+    list-style: none;
+}
+
+li{
+    background-color:rgb(204, 121, 90);
+    margin-left:10px;
+    width:80px;
+    padding:5px;
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 8px;
+    /*padding: 25px 50px 75px 100px; top,r,b,l*/
+
+}
+nav a {
+    text-decoration: none;
+    color: seashell;
+  }
+
+section, article {
+    padding: 50px;
+    margin: 30px;
+}
+section>p{
+    margin-top: 20px;
+}
+
+article {
+    background-color: rgb(246, 248, 243);
+}
+
+article > div{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divImg {
+    width: 30%;
+    text-align: center;
+}
+
+article img {
+    border-radius: 50%;
+}
+
+article p {
+    width: 70%;
+    
+}
+
+footer  {
+    background-color: grey;
+    color: rgb(48, 45, 45);
+    padding: 25px;
+}
+
+footer p{
+    text-align: center;
+}
+.footer_p1 {
+    margin:20px;
+}
+.footer_p2{
+    font-size: small;
+}
