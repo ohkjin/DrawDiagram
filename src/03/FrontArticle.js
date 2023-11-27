@@ -15,6 +15,7 @@ function FrontArticle({div_id,title,href,txt}) {
                 </p>
             </div>
         </article>
+        {/* <Like/> */}
     </div>
   )
 }
