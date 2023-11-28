@@ -1,7 +1,7 @@
-
+import style from './Font.module.css'
 function LogoP({msg,emoji}){
     return (
-        <p>
+        <p className={style.font}>
             {/* JSX표현식 */}
             {msg}
             {emoji}

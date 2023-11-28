@@ -1,7 +1,7 @@
 import style from "./Lotto.module.css"
 import { useState } from "react"
-import "./LottoCSS.css"
-
+// import "./LottoCSS.css"
+import LogoP from '../01/LogoP'
 export default function Lotto() {
     const [tags,setTags]=useState();
 
@@ -29,10 +29,13 @@ export default function Lotto() {
         setTags(spTags);
     }
     return(
+        <>    
         <main className={style.main}>
         <section className={style.sec}>
             <form className={style.form}>
+           
                 <div id="div1" className = {style.fdiv}>
+                <LogoP emoji={"🐋".repeat(5)} />
                     <div id="d1"className={style.div1}>
                         <span>
                             {tags}
@@ -52,5 +55,6 @@ export default function Lotto() {
             </form>
         </section>   
     </main>
+    </>
     )
 }
