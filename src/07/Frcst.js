@@ -30,7 +30,7 @@ export default function Frcst() {
         let rgObject =dataF[cnKey[idx]]
         let rgArr =rgObject.split(",")
         let rgEachArr = rgArr.map((rg)=>rg.split(":"))
-    
+        console.log(rgEachArr);
         setCN(
             rgEachArr.map((a,idx)=>{
                 let state =<div>
