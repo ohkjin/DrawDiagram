@@ -1,25 +1,46 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import {BiCameraMovie} from "react-icons/bi";
 import Tailh1 from '../UI/Tailh1';
+import TailInputDate from '../UI/TailInputDate';
+import TailTable from '../UI/TailTable';
 
 function BoxOffice() {
     const [trs, setTrs] = useState();
     const [boxlist, setBoxlist] = useState();//초기값 필요
+    const rfDt = useRef();
+    const [max,setMax] = useState();
+
+    const getFetchData = (dt)=>{//dt형식: 20231101
+        //환경 변수 가져오기 => .gitignore에서 .env 하면 정보 노출 x, .env에서 REACT_APP_ 이름 설정하기
+        let apikey = process.env.REACT_APP_BOXOFFICE;
+        let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
+        url += `key=${apikey}`
+        url += `&targetDt=${dt}`;
+
+        console.log(url);
+
+        fetch(url)
+        .then(resp => resp.json())
+        .then(data => setBoxlist(data.boxOfficeResult.dailyBoxOfficeList))
+        .catch(err => console.log(err))
+
+    }
   
     useEffect(() => {
-      //환경 변수 가져오기 => .gitignore에서 .env 하면 정보 노출 x, .env에서 REACT_APP_ 이름 설정하기
-      let apikey = process.env.REACT_APP_BOXOFFICE;
-      let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
-      url += `key=${apikey}`
-      url += `&targetDt=20231128`;
-  
-      console.log(url);
-  
-      fetch(url)
-      .then(resp => resp.json())
-      .then(data => setBoxlist(data.boxOfficeResult.dailyBoxOfficeList))
-      .catch(err => console.log(err))
-  
+    
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    yesterday = yesterday.toISOString().slice(0,10);
+    setMax(yesterday);// 형식 2023-02-12
+    // let yd = yesterday.getDate();
+    // (yd<10)?yd=`0${yd}`:yd=yd;
+    // let ym = yesterday.getMonth()+1;
+    // (ym<10)?ym=`0${ym}`:ym=ym;
+    // let yy = yesterday.getFullYear();
+    // date = `${yy}${ym}${yd}`;
+    
+    console.log(yesterday);
+    getFetchData(yesterday.replaceAll("-",""));
   
     }, []);
   
@@ -27,58 +48,19 @@ function BoxOffice() {
     useEffect(() => {
       console.log("boxlist", boxlist);
       (boxlist===undefined)?
-      setTrs(<tr key = {0} className="hover:bg-gray-100 dark:hover:bg-gray-700">
-        <td className="p-4 w-4">
-            <div className="flex items-center">
-                <input id="checkbox-table-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                </input><label htmlFor="checkbox-table-1" className="sr-only">checkbox</label>
-            </div>
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        </td>
-        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-            <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline"></a>
-            </td>
-      </tr>)
+      setTrs(<TailTable key={0} />)
       :setTrs(boxlist.map((item)=>
-      <tr key = {item.movieCd} className="hover:bg-orange-300 hover:text-blue-400 hover:font-extrabold">
-        <td className="p-4 w-4">
-            <div className="flex items-center">
-                <input id="checkbox-table-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                </input><label htmlFor="checkbox-table-1" className="sr-only">checkbox</label>
-            </div>
-        </td>
-        <td className="py-4 px-6 text-sm  whitespace-nowrap dark:text-white">
-            <span className="inline-flex justify-center items-center w-5 h-5 m-2 bg-slate-500 text-white rounded-md">
-                {item.rank}
-            </span>
-            {item.movieNm}
-        </td>
-        <td className="py-4 px-6 text-sm  text-gray-500 whitespace-nowrap dark:text-white">
-            {parseInt(item.salesAcc).toLocaleString('ko-KR')}원
-        </td>
-        <td className="py-4 px-6 text-sm  text-gray-500 whitespace-nowrap dark:text-white">
-            {parseInt(item.audiCnt).toLocaleString('ko-KR')}명
-        </td>
-        <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap dark:text-white">
-            {(parseInt(item.rankInten)>0)?
-            <span className='text-red-600'>▲{item.rankInten}</span>
-            : <span className='text-blue-600'>▼{item.rankInten}</span>}
-            </td>
-        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-            <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-            </td>
-      </tr>
+        <TailTable key={item.movieCd} rank= {item.rank}  movieNm={item.movieNm} 
+        salesAcc={item.salesAcc} audiCnt={item.audiCnt} rankInten={item.rankInten}/>
       )
       )
     }, [boxlist]);
 
+  
+    const handleDtChange=(e)=>{
+        getFetchData(rfDt.current.value.replaceAll("-",""));
+        // getFetchData(e.target.value.replaceAll("-",""));
+    }
 
     return (
         <div className='container mx-auto  h-screen overflow-y-scroll'>
@@ -88,6 +70,21 @@ function BoxOffice() {
                     <div className="flex flew-row justify-center items-center mb-5">
                         <BiCameraMovie className="text-4xl text-sky-500 mr-5"/>
                         <Tailh1 title="박스오피스"/>
+                    </div>
+                    <div className="flex flew-col justify-left items-left mb-5 ">
+                        <div className='bg-sky-200 rounded-md'>
+                            <label htmlFor='inputDt' className=' text-white'>
+                                날짜 선택
+                            </label>
+                        </div>
+                        <div>
+                            <TailInputDate id = 'inputDt' name = 'inputDt'
+                                       dt={max} //초기값
+                                       max={max}
+                                       rf={rfDt}
+                                       handleChange ={handleDtChange}
+                                       className='border-cyan-400'/>
+                        </div>
                     </div>
                     <div className="flex flex-col">
                         {/* sm: 화면이 작아졌을시 자동적용 */}
@@ -118,26 +115,11 @@ function BoxOffice() {
                                                     증감율
                                                 </th>
                                                 <th scope="col" className="p-4">
-                                                    <span className="sr-only">Edit</span>
+                                                    <span className="sr-only">Link</span>
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                                            <tr className="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                                <td className="p-4 w-4">
-                                                    <div className="flex items-center">
-                                                        <input id="checkbox-table-1" type="checkbox" className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                                        </input><label htmlFor="checkbox-table-1" className="sr-only">checkbox</label>
-                                                    </div>
-                                                </td>
-                                                <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">Apple Imac 27"</td>
-                                                <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">Desktop PC</td>
-                                                <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">Desktop PC</td>
-                                                <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">$1999</td>
-                                                <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                                    <a href="#" className="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                                </td>
-                                            </tr>
                                             {trs}
                                         </tbody>
                                     </table>
