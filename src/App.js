@@ -4,13 +4,15 @@
 // import FrontEnd from './03/FrontEnd';
 // import Lotto from './05/Lotto';
 // import LottoReview from './05/LottoReview';
-import BoxOffice from './06_tailwind/BoxOffice';
+// import BoxOffice from './06_tailwind/BoxOffice';
 // import Frcst from './07/Frcst';
 // import RefTest from './08/RefTest';
+import Traffic from './09_traffic/Traffic';
 import LogoMain from './01/LogoMain';
 
 
 import './App.css';
+
 
 
 function App() {
@@ -21,9 +23,10 @@ function App() {
       {/* <FrontEnd/> */}
       {/* <LottoReview/> */}
       {/* <Lotto/> */}
-      <BoxOffice/>
+      {/* <BoxOffice/> */}
       {/* <Frcst/> */}
       {/* <RefTest/> */}
+      <Traffic/>
       <LogoMain />
     </>
   );

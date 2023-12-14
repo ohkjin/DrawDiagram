@@ -22,7 +22,7 @@ export default function Frcst() {
         fetch(url)
         .then((resp)=>resp.json())
         .then((data)=>setDataF(data.response.body.items[0]))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err))//순차적 진행
     }
     //날짜 클릭시
     const handleDtClick=(idx)=>{

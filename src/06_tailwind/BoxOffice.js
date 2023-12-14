@@ -10,7 +10,7 @@ function BoxOffice() {
     const rfDt = useRef();
     const [max,setMax] = useState();
 
-    const getFetchData = (dt)=>{//dt형식: 20231101
+    const getFetchData = (dt)=>{//날짜 가져오기 dt형식: 20231101
         //환경 변수 가져오기 => .gitignore에서 .env 하면 정보 노출 x, .env에서 REACT_APP_ 이름 설정하기
         let apikey = process.env.REACT_APP_BOXOFFICE;
         let url = "https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
