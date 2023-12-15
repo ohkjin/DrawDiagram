@@ -12,6 +12,7 @@ import LogoMain from './01/LogoMain';
 
 
 import './App.css';
+import Gallery from './10/Gallery';
 
 
 
@@ -26,7 +27,8 @@ function App() {
       {/* <BoxOffice/> */}
       {/* <Frcst/> */}
       {/* <RefTest/> */}
-      <Traffic/>
+      {/* <Traffic/> */}
+      <Gallery/>
       <LogoMain />
     </>
   );

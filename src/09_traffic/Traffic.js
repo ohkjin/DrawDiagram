@@ -1,6 +1,5 @@
 import React from 'react'
 import Tailh1 from '../UI/Tailh1'
-import TailBlueButton from '../UI/TailBlueButton'
 import { useState, useEffect} from 'react'
 import TrafficNav from './TrafficNav'
 import TailTable from '../UI/TailTable'
@@ -13,7 +12,8 @@ export default function Traffic() {
     const [selC1, setSelC1] =useState();  //선택된 대분류
     const [selC2, setSelC2] =useState();  //''
 
-    const [detail, setDetail] =useState();
+    const [detail, setDetail] =useState(); //상세정보
+    const detailKey = ['사망자수','사망자수','중상자수', '경상자수','부상신고자수',] //상세정보순서
 
     //async: 비동기 함수라는 뜻
     const urlFetch= async()=>{ 
@@ -21,7 +21,7 @@ export default function Traffic() {
         let url=`https://api.odcloud.kr/api/15070282/v1/uddi:34f1f0b1-1289-49db-be1b-a4566880bb97?`;
         url+=`page=1&perPage=20&returnType=JSON`;
         url+=`&serviceKey=${apikey}`;
-        // console.log(url);
+        console.log(url);
 
         //await을 쓸시 fetch가 될때까지 기다름
         //동기에서 .then과 같은 결과
@@ -76,8 +76,18 @@ export default function Traffic() {
         if(selC2==undefined) return;
         let type = tdata.filter(item=>item.사고유형대분류==selC1
                                         &&item.사고유형중분류==selC2);
-        // let tm = type.map(item=>item);
-        // console.log(c2tm);
+        //Object 저장
+        type = type[0]; //array에 있는 상태에서 빼오기
+        
+        console.log("detail", type);
+        if(type==undefined) return;
+        //Object.keys(type): type의 모든 key
+        type = 
+        type = detailKey.map((k,idx)=><div key={`d1${idx}`}>
+                                        <div className='bg-orange-200 rounded-md flex justify-center items-center'>{k}</div>
+                                        <div className='flex justify-center items-center text-orange-600'>{type[k]}</div>
+                                        </div>
+                            )
         setDetail(type);
         console.log(detail);
         
@@ -97,10 +107,10 @@ export default function Traffic() {
             <div className='w-4/5'>
                 {c2&&<TrafficNav title={'중분류'} carr={c2} sel={selC2} setSel={setSelC2}/>}
             </div>
-            <div className='w-4/5'>
-            <table>
-                {detail&&detail.map((d,idx)=> <TailTable key={`${d}${idx}`} rank={idx+1} movieNm={d["사고유형"]} audiCnt={d["사망자수"]}  rankInten={d[2]}  />)}
-            </table>
+            <div className='w-4/5 my-10'>
+            <div className="grid grid-cols-5 gap-5 ">
+                {detail}
+            </div>
             </div>
         </div> 
     </div>
