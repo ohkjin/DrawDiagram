@@ -1,4 +1,4 @@
-import React, { useEffect, use, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Tailh1 from '../UI/Tailh1';
 import {FcMultipleCameras} from 'react-icons/fc'
 import TailCard from '../UI/TailCard';
@@ -25,7 +25,7 @@ export default function Gallery() {
         const data = await resp.json();
 
         console.log(url);
-        console.log(data);
+        // console.log(data);
         setGdata(data.response.body.items.item);
         
     }
@@ -36,17 +36,20 @@ export default function Gallery() {
 
     //gdata변경
     useEffect(()=>{
-        if(gdata==undefined) return;
-        console.log(gdata);
-        let gtm = gdata.map((g,idx)=><TailCard k={`gal${idx}`}
-                                    imgSrc={g["galWebImageUrl"]}
-                                    title= {g["galTitle"]}
-                                    subtitle={g["galPhotographyLocation"]}
-                                    by={g["galPhotographer"]}
-                                    tags={g["galSearchKeyword"]}
-                                    />
-                            )
+        if(gdata===undefined) return;
+        // console.log(gdata);
+        if (gdata!==null){
+            let gtm = gdata.map((g,idx)=><TailCard k={`gal${idx}`}
+                                        imgSrc={g.galWebImageUrl.replace("http://","https://")}
+                                        title= {g["galTitle"]}
+                                        subtitle={g["galPhotographyLocation"]}
+                                        by={g["galPhotographer"]}
+                                        tags={g["galSearchKeyword"]}
+                                        />
+                                )
         setGtag(gtm);
+        }
+        
     },[gdata])
 
     const handleOnKeyPress = e => {
@@ -58,11 +61,12 @@ export default function Gallery() {
     const handleSearchClick=(e)=>{
         if(e.key!=="Enter") e.preventDefault();
         e.preventDefault();
-        if(urlKey.current.value!="")  urlFetch(urlKey.current.value);
+        if(urlKey.current.value!=="")  urlFetch(urlKey.current.value);
         else urlFetch(`%EC%84%9C%EC%9A%B8`)
     }
     const handleResetClick=(e)=>{
         e.preventDefault();
+        setGtag('');
         urlKey.current.value='';
     }
   return (
@@ -85,8 +89,9 @@ export default function Gallery() {
                 </div>
             </div>
             <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900">Search Result</h2>
-                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                <h2 className="text-2xl font-bold tracking-tight text-gray-400/40">Search Result</h2>
+                {/* <div className="mt-6 grid grid-flow-row auto-cols-max  gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"> */}
+                <div className="mt-6 grid grid-flow-row-dense gap-x-6 gap-y-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-5">
                     {gtag}
                 </div>
             </div>

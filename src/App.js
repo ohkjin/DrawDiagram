@@ -7,12 +7,14 @@
 // import BoxOffice from './06_tailwind/BoxOffice';
 // import Frcst from './07/Frcst';
 // import RefTest from './08/RefTest';
-import Traffic from './09_traffic/Traffic';
+// import Traffic from './09_traffic/Traffic';
+// import Gallery from './10/Gallery';
+import Festival from './11/Festival';
 import LogoMain from './01/LogoMain';
 
 
 import './App.css';
-import Gallery from './10/Gallery';
+
 
 
 
@@ -28,7 +30,8 @@ function App() {
       {/* <Frcst/> */}
       {/* <RefTest/> */}
       {/* <Traffic/> */}
-      <Gallery/>
+      {/* <Gallery/> */}
+      <Festival/>
       <LogoMain />
     </>
   );
