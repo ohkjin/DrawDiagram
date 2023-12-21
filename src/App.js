@@ -10,7 +10,7 @@
 // import Traffic from './09_traffic/Traffic';
 // import Gallery from './10/Gallery';
 import Festival from './11/Festival';
-import LogoMain from './01/LogoMain';
+// import LogoMain from './01/LogoMain';
 
 
 import './App.css';
@@ -32,7 +32,7 @@ function App() {
       {/* <Traffic/> */}
       {/* <Gallery/> */}
       <Festival/>
-      <LogoMain />
+      {/* <LogoMain /> */}
     </>
   );
 }
