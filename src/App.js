@@ -9,8 +9,9 @@
 // import RefTest from './08/RefTest';
 // import Traffic from './09_traffic/Traffic';
 // import Gallery from './10/Gallery';
-import Festival from './11/Festival';
-// import LogoMain from './01/LogoMain';
+// import Festival from './11/Festival';
+import LogoMain from './01/LogoMain';
+import Rmain from './12/Rmain';
 
 
 import './App.css';
@@ -31,8 +32,9 @@ function App() {
       {/* <RefTest/> */}
       {/* <Traffic/> */}
       {/* <Gallery/> */}
-      <Festival/>
-      {/* <LogoMain /> */}
+      {/* <Festival/> */}
+      <Rmain/>
+      <LogoMain />
     </>
   );
 }
