@@ -2,7 +2,7 @@ import React from 'react'
 import Tailh1 from '../UI/Tailh1'
 import { useState, useEffect} from 'react'
 import TrafficNav from './TrafficNav'
-import TailTable from '../UI/TailTable'
+
 
 export default function Traffic() {
     const [tdata,setTdata]=useState(); //전체데이터
@@ -38,7 +38,7 @@ export default function Traffic() {
 
     useEffect(()=>{
         //1.초기화
-        if(tdata==undefined) return; //tdata:undefined: useState에서 초기화를 시켜주거나useState([]) 실행이 되지 않게 막기
+        if(tdata===undefined) return; //tdata:undefined: useState에서 초기화를 시켜주거나useState([]) 실행이 되지 않게 막기
         console.log(tdata[0]);
      
         //2.대분류 생성
@@ -73,14 +73,14 @@ export default function Traffic() {
 
     useEffect(()=>{
         // console.log(`selC1 =${selC1}`);
-        if(selC2==undefined) return;
+        if(selC2===undefined) return;
         let type = tdata.filter(item=>item.사고유형대분류==selC1
                                         &&item.사고유형중분류==selC2);
         //Object 저장
         type = type[0]; //array에 있는 상태에서 빼오기
         
         console.log("detail", type);
-        if(type==undefined) return;
+        if(type===undefined) return;
         //Object.keys(type): type의 모든 key
         type = 
         type = detailKey.map((k,idx)=><div key={`d1${idx}`}>

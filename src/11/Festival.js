@@ -30,9 +30,9 @@ export default function Festival() {
         console.log("fesdata",fesdata);
         if(fesdata===undefined) return;
         let temp = fesdata.map(fes=>fes.GUGUN_NM);
-        // console.log(temp);
         temp = new Set(temp);
         temp = [...temp].sort();
+        console.log(temp);
         setGulist(temp);
         // temp = temp.map((op,idx)=> <option key={`op${idx}`} value={op}>{op}</option>);
         // setOptions(temp);
@@ -65,7 +65,7 @@ export default function Festival() {
                 </div>
             </div>
             <div className="w-72">
-            <TailSelect items={gulist} rf={guRef} handleChange={handleSelGu} init="--선택--"/>
+            <TailSelect opItems={gulist} rf={guRef} handleChange={handleSelGu} init="--선택--"/>
             {/* <select id="selGu" ref={guRef} onChange={handleSelGu}>
                 <option value="">--지역 선택--</option>
                 {options}

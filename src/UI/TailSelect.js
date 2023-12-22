@@ -1,6 +1,6 @@
 
-export default function TailSelect({items,rf,handleChange,init}) {
-    const options = items.map((op,idx)=><option key={`op${idx}`} value={op}>{op}</option>);
+export default function TailSelect({opItems,rf,handleChange,init}) {
+    const options = opItems.map((op,idx)=><option key={`op${idx}`} value={op}>{op}</option>);
     return (
         <select ref={rf} onChange={handleChange} 
                 // defaultValue={init}

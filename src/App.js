@@ -10,9 +10,9 @@
 // import Traffic from './09_traffic/Traffic';
 // import Gallery from './10/Gallery';
 // import Festival from './11/Festival';
-import LogoMain from './01/LogoMain';
-import Rmain from './12/Rmain';
-
+// import LogoMain from './01/LogoMain';
+// import Rmain from './12/Rmain';
+import Fcst from './13/Fcst';
 
 import './App.css';
 
@@ -33,8 +33,9 @@ function App() {
       {/* <Traffic/> */}
       {/* <Gallery/> */}
       {/* <Festival/> */}
-      <Rmain/>
-      <LogoMain />
+      {/* <Rmain/> */}
+      <Fcst/>
+      {/* <LogoMain /> */}
     </>
   );
 }
