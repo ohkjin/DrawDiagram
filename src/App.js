@@ -13,7 +13,8 @@
 // import LogoMain from './01/LogoMain';
 // import Rmain from './12/Rmain';
 // import Fcst from './13/Fcst';
-import FcstMain from './13/FcstMain';
+// import FcstMain from './13/FcstMain';
+import Ex01 from './90/Ex01';
 
 import './App.css';
 
@@ -36,7 +37,8 @@ function App() {
       {/* <Festival/> */}
       {/* <Rmain/> */}
       {/* <Fcst/> */}
-      <FcstMain/>
+      {/* <FcstMain/> */}
+      <Ex01/>
       {/* <LogoMain /> */}
     </>
   );
